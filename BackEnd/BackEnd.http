@@ -1,0 +1,59 @@
+@BackEnd_HostAddress = http://localhost:5105
+
+GET {{BackEnd_HostAddress}}/weatherforecast/
+Accept: application/json
+
+### 
+POST api/attendance/events
+###
+GET {{BackEnd_HostAddress}}/api/attendance/events/past
+###
+POST http://localhost:5105/api/attendance/members
+###
+GET http://localhost:5105/api/attendance/members
+###
+POST http://localhost:5105/api/attendance/attendance
+###
+GET http://localhost:5105/api/attendance/attendance
+
+
+###
+
+
+### Admin Login Request
+POST http://localhost:5105/api/admins/login
+Content-Type: application/json
+
+{
+  "AdminId": 1,
+  "Password": "12345678"
+}
+
+
+###
+# POST http://localhost:5105/api/auth/login
+
+POST http://localhost:5105/api/auth/login
+Content-Type: application/json
+
+
+    
+{
+  "Username": "admin",
+  "Password": "password"
+}
+
+
+###
+
+GET  http://localhost:5105/api/attendance/events/current
+
+###
+DELETE http://localhost:5105/api/attendance/members/1
+
+
+###
+
+
+
+GET http://localhost:5105/api/attendance/members/1
