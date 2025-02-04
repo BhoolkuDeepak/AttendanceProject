@@ -57,7 +57,7 @@ public class JsonService
 
     public void AddAttendance(Attendance attendance)
     {
-        .
+        
         var attendances = GetAttendances();  
         attendance.AttendanceId = attendances.Count > 0 ? attendances.Max(a => a.AttendanceId) + 1 : 1; 
         attendances.Add(attendance);  
