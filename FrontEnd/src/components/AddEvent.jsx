@@ -1,127 +1,139 @@
-  import { useState } from "react";
+import { useState } from "react";
 
-  function AddEvent() {
-    const [eventName, setEventName] = useState("");
-    const [timings, setTimings] = useState("");
-    const [location, setLocation] = useState("");
-    const [isRecurring, setIsRecurring] = useState(false);
-    const [recurringDay, setRecurringDay] = useState("");
-    const [errorMessage, setErrorMessage] = useState(""); // To store error messages
+function AddEvent({ closeModal }) {
+  const [eventName, setEventName] = useState("");
+  const [timings, setTimings] = useState("");
+  const [location, setLocation] = useState("");
+  const [isRecurring, setIsRecurring] = useState(false);
+  const [recurringDay, setRecurringDay] = useState("");
+  const [errors, setErrors] = useState({});
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
+  const validate = () => {
+    let tempErrors = {};
 
-      // Basic validation
-      if (!eventName || !timings || !location) {
-        setErrorMessage("Please fill out all the fields.");
-        return;
-      }
+    if (!eventName.trim()) {
+      tempErrors.eventName = "Event name is required.";
+    } else if (eventName.length < 3) {
+      tempErrors.eventName = "Event name must be at least 3 characters.";
+    }
 
-      // Optional: Add time format validation for "timings" field
-      const timeRegex = /^([0-9]{1,2}):([0-9]{2})\s?(AM|PM)$/;
-      if (!timeRegex.test(timings)) {
-        setErrorMessage("Please enter a valid time format (e.g., 10:00 AM).");
-        return;
-      }
+    if (!timings.trim()) {
+      tempErrors.timings = "Timings are required.";
+    } else if (!/^([0-9]{1,2}):([0-9]{2})\s?(AM|PM)$/.test(timings)) {
+      tempErrors.timings = "Please enter a valid time format (e.g., 10:00 AM).";
+    }
 
-      // If timings is provided, validate time
+    if (!location.trim()) {
+      tempErrors.location = "Location is required.";
+    }
 
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
 
-      const eventData = {
-        eventName: eventName,
-        timings: timings,
-        location: location,
-        isRecurring: isRecurring,
-        recurringDay: isRecurring ? recurringDay : "", // Only set recurringDay if isRecurring is true
-      };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validate()) return;
 
-      fetch("http://localhost:5105/api/attendance/events", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(eventData),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            return response.json().then((data) => {
-              throw new Error(data.message || "Event could not be added");
-            });
-          }
-          return response.json();
-        })
-        .then(() => {
-          // Clear form and error message on success
+    const eventData = {
+      eventName,
+      timings,
+      location,
+      isRecurring,
+      recurringDay: isRecurring ? recurringDay : "",
+    };
+
+    fetch("http://localhost:5105/api/attendance/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(eventData),
+    })
+      .then((response) => {
+        if (response.ok) {
           setEventName("");
           setTimings("");
           setLocation("");
           setIsRecurring(false);
           setRecurringDay("");
-          setErrorMessage(""); // Clear error message on success
+          setErrors({});
           alert("Event added successfully!");
-        })
-        .catch((err) => {
-          setErrorMessage(err.message); // Set error message on failure
-        });
-    };
+          closeModal();
+        } else {
+          throw new Error("Error adding event");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
 
-    return (
-      <form onSubmit={handleSubmit} className="p-4 bg-white rounded-lg shadow">
-        <h2 className="text-xl font-bold">Add Event</h2>
-        {errorMessage && (
-          <div className="text-red-500 mb-4">{errorMessage}</div> // Display error message
-        )}
-        <input
-          type="text"
-          placeholder="Event Name"
-          value={eventName}
-          onChange={(e) => setEventName(e.target.value)}
-          className="block border p-2 rounded w-full my-2"
-        />
-        <input
-          type="text"
-          placeholder="Timings (e.g., 10:00 AM)"
-          value={timings}
-          onChange={(e) => setTimings(e.target.value)}
-          className="block border p-2 rounded w-full my-2"
-        />
-        <input
-          type="text"
-          placeholder="Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="block border p-2 rounded w-full my-2"
-        />
+  return (
+    <div className="w-full max-w-lg p-6 text-[rgb(69,75,27)]">
+      <h2 className="text-2xl font-semibold mb-4">Add Event</h2>
 
-        <div className="mb-4">
-          <label htmlFor="isRecurring" className="block text-sm font-medium">Recurring</label>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div>
+          <label className="block text-lg font-medium opacity-80">Event Name</label>
+          <input
+            type="text"
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
+            className="w-full p-3 bg-transparent border-b-2 border-[rgb(69,75,27)] focus:outline-none focus:border-green-700 transition-all duration-200"
+          />
+          {errors.eventName && <p className="text-red-600 text-sm">{errors.eventName}</p>}
+        </div>
+
+        <div>
+          <label className="block text-lg font-medium opacity-80">Timings</label>
+          <input
+            type="text"
+            value={timings}
+            onChange={(e) => setTimings(e.target.value)}
+            className="w-full p-3 bg-transparent border-b-2 border-[rgb(69,75,27)] focus:outline-none focus:border-green-700 transition-all duration-200"
+          />
+          {errors.timings && <p className="text-red-600 text-sm">{errors.timings}</p>}
+        </div>
+
+        <div>
+          <label className="block text-lg font-medium opacity-80">Location</label>
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="w-full p-3 bg-transparent border-b-2 border-[rgb(69,75,27)] focus:outline-none focus:border-green-700 transition-all duration-200"
+          />
+          {errors.location && <p className="text-red-600 text-sm">{errors.location}</p>}
+        </div>
+
+        <div>
+          <label className="block text-lg font-medium opacity-80">Recurring Event</label>
           <input
             type="checkbox"
-            id="isRecurring"
             checked={isRecurring}
             onChange={(e) => setIsRecurring(e.target.checked)}
             className="mr-2"
           />
-          Recurring Event
         </div>
 
         {isRecurring && (
-          <div className="mb-4">
-            <label htmlFor="recurringDay" className="block text-sm font-medium">Recurring Day</label>
+          <div>
+            <label className="block text-lg font-medium opacity-80">Recurring Day</label>
             <input
               type="text"
-              id="recurringDay"
-              placeholder="e.g., Tuesday"
               value={recurringDay}
               onChange={(e) => setRecurringDay(e.target.value)}
-              className="block border p-2 rounded w-full my-2"
+              className="w-full p-3 bg-transparent border-b-2 border-[rgb(69,75,27)] focus:outline-none focus:border-green-700 transition-all duration-200"
             />
           </div>
         )}
 
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Add Event</button>
+        <button
+          type="submit"
+          className="bg-[rgb(69,75,27)] text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-all duration-200"
+        >
+          Add Event
+        </button>
       </form>
-    );
-  }
+    </div>
+  );
+}
 
-  export default AddEvent;
+export default AddEvent;

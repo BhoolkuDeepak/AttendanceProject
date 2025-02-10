@@ -1,68 +1,75 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { motion, useAnimation, useDragControls } from "framer-motion";
 
 function EventList() {
   const [events, setEvents] = useState([]);
-  const [attendance, setAttendance] = useState([]);
-  const [members, setMembers] = useState([]);
+  const controls = useAnimation();
+  const dragControls = useDragControls();
+  const containerRef = useRef(null);
+  useEffect(() => {
+    controls.start({
+      x: ["0%", "-100%"], // Continuous left movement
+      transition: { repeat: Infinity, duration: 20, ease: "linear" },
+    });
+  }, [controls]);
 
   useEffect(() => {
     fetch("http://localhost:5105/api/attendance/events")
       .then((response) => response.json())
-      .then((data) => setEvents(data))
+      .then((data) => setEvents([...data, ...data])) // Duplicate for seamless scrolling
       .catch((error) => console.error("Error fetching events:", error));
-
-    fetch("http://localhost:5105/api/attendance/attendance")
-      .then((response) => response.json())
-      .then((data) => setAttendance(data))
-      .catch((error) => console.error("Error fetching attendance:", error));
-
-    fetch("http://localhost:5105/api/attendance/members")
-      .then((response) => response.json())
-      .then((data) => setMembers(data))
-      .catch((error) => console.error("Error fetching members:", error));
   }, []);
 
-  const getAttendeesNames = (eventId) => {
-    const eventAttendance = attendance.filter((record) => record.eventId === eventId);
-
-    const memberIds = eventAttendance.flatMap((record) => record.attendedMembers);
-
-    return memberIds
-      .map((id) => {
-        const member = members.find((m) => m.memberId === id);
-        return member ? member.name : "Old Member";
-      })
-      .join(", ");
+  const handleDragEnd = (_, info) => {
+    // Continue scrolling based on drag velocity
+    controls.start({
+      x: info.offset.x * 2, // Scale velocity
+      transition: {
+        type: "inertia",
+        velocity: info.velocity.x, // Use framer's inertia for momentum
+        power: 0.5, // Adjusts the friction
+        min: -containerRef.current.scrollWidth / 2, // Prevent over-scrolling
+        max: 0, // Keep within bounds
+      },
+    });
   };
 
   return (
-    <div className="  mx-auto">
-      <h2 className="text-4xl font-bold text-gray-800 text-center mb-8 tracking-wider" style={{  }}>
-        Upcoming Events
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {events.map((event) => (
-          <div
-            key={event.eventId}
-            className="relative bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out group"
-            style={{ fontFamily: "' cursive" }}
-          >
-            <h3 className="text-2xl font-semibold text-indigo-800 tracking-wide">{event.eventName}</h3>
-            <p className="text-sm text-gray-600 mt-2">{event.timings}</p>
-
-            <div className="absolute bottom-0 left-0 right-0 bg-blue-200 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out p-4 rounded-b-xl z-10 shadow-2xl transform group-hover:scale-105">
-              <h4 className="text-lg font-semibold text-gray-800 tracking-wide">Attendees</h4>
-              <ul className="mt-2">
-                {getAttendeesNames(event.eventId) ? (
-                  <li className="text-gray-700">{getAttendeesNames(event.eventId)}</li>
-                ) : (
-                  <li className="text-gray-700">No attendees</li>
-                )}
-                <p className="mt-2 text-gray-700">{event.eventDetails}</p>
-              </ul>
-            </div>
-          </div>
-        ))}
+    <div className="w-full h-screen flex flex-col items-center justify-center relative overflow-hidden">
+      <div
+        className="relative w-full max-w-5xl overflow-hidden"
+        ref={containerRef}
+      >
+        <motion.div
+          className="flex gap-4 cursor-grab active:cursor-grabbing"
+          drag="x"
+          dragConstraints={{ left: -1000, right: 1000 }} // Allow more movement
+          dragElastic={0.2} // Adds natural resistance
+          dragControls={dragControls}
+          animate={controls} // Apply momentum effect
+          onDragEnd={handleDragEnd} // Apply inertia on release
+          style={{ display: "flex" }}
+        >
+          {events.map((event, index) => (
+            <motion.div
+              key={index}
+              className="flex-none bg-white rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
+              style={{
+                width: "300px",
+                height: "250px",
+                cursor: "grab",
+              }}
+            >
+              <div className="p-4">
+                <h2 className="text-lg  text-[rgb(69,75,27)] font-bold  mb-1">
+                  {event.eventName}
+                </h2>
+                <p className="text-[rgb(69,75,27)] text-sm mb-1">{event.timings}</p>
+                <p className="text-[rgb(69,75,27)] text-sm">{event.eventDetails}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </div>
   );
