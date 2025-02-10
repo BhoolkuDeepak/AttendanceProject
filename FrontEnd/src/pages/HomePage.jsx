@@ -18,7 +18,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white">
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden ">
       {/* Sampark Section */}
       {step === 0 && (
         <motion.h1

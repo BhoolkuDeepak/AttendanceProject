@@ -65,12 +65,18 @@ function MarkAttendance() {
   };
 
   return (
-    <div className="relative p-6 rounded-lg w-11/12 md:w-3/4 lg:w-1/2 mx-auto mt-10">
-      <h2 className="text-3xl font-bold text-[rgb(69,75,27)] text-center mb-6">
+    <div className="relative p-6 rounded-lg w-full max-w-4xl mx-auto mt-12">
+      <motion.h2
+        className="text-3xl font-bold text-[rgb(69,75,27)] text-center mb-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         Mark Attendance
-      </h2>
+      </motion.h2>
 
       <form onSubmit={handleSubmit}>
+        {/* Event Selection */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700">
             Event
@@ -78,7 +84,7 @@ function MarkAttendance() {
           <select
             value={selectedEvent}
             onChange={(e) => setSelectedEvent(e.target.value)}
-            className="w-full p-3 border rounded-md focus:ring-2 focus:ring-[rgb(69,75,27)]"
+            className="w-full p-4 rounded-md focus:outline-none focus:ring-0  transition-all duration-300"
             required
           >
             <option value="">Select Event</option>
@@ -90,18 +96,19 @@ function MarkAttendance() {
           </select>
         </div>
 
+        {/* Member Selection */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700">
             Members
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
             {members.map((member) => (
               <div
                 key={member.memberId}
-                className={`p-4 rounded-lg border cursor-pointer transition-all duration-300 ${
+                className={`p-4 rounded-lg  cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105 ${
                   selectedMembers.includes(member.memberId)
                     ? "bg-[rgb(69,75,27)] text-white"
-                    : "bg-gray-100 hover:bg-gray-200"
+                    : " hover:bg-gray-200"
                 }`}
                 onClick={() => handleCheckboxChange(member.memberId)}
               >
@@ -112,13 +119,14 @@ function MarkAttendance() {
           </div>
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
-          className={`w-full p-3 text-white rounded-md ${
+          className={`w-full p-4 text-white rounded-md mt-4 transition-all duration-300 ${
             loading
               ? "bg-gray-700 cursor-not-allowed"
               : "bg-[rgb(69,75,27)] hover:bg-[rgb(55,65,25)]"
-          } transition-all duration-300`}
+          }`}
           disabled={loading || selectedMembers.length === 0}
         >
           {loading ? "Submitting..." : "Submit"}

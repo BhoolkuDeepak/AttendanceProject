@@ -49,7 +49,7 @@ const LoginPage = ({ onLogin }) => {
         alignItems: "center",
         width: "100%",
         height: "100vh",
-        backgroundColor: "#f0f4fb",
+        backgroundColor: "rgb(245,245,240)", // Background color remains the same
       }}
     >
       <div
@@ -57,8 +57,8 @@ const LoginPage = ({ onLogin }) => {
           display: "flex",
           flexDirection: "column",
           backgroundColor: "#fff",
-          borderRadius: "4px",
-          boxShadow: "0 0 1px rgba(0, 0, 0, 0.2)",
+          borderRadius: "8px", // Slightly rounded corners
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", // Softer shadow
           padding: "48px 49px",
           boxSizing: "border-box",
           width: "400px",
@@ -69,7 +69,7 @@ const LoginPage = ({ onLogin }) => {
             textAlign: "center",
             fontFamily: "Roboto",
             fontSize: "24px",
-            color: "#4154f1",
+            color: "#454b1b",  // Updated color to match AddMember
             marginBottom: "20px",
           }}
         >
@@ -99,6 +99,7 @@ const LoginPage = ({ onLogin }) => {
               border: "1px solid #ced4da",
               padding: "8px 12px",
               boxSizing: "border-box",
+              backgroundColor: "#f9f9f9",  // Light background color for input
             }}
           />
         </div>
@@ -126,6 +127,7 @@ const LoginPage = ({ onLogin }) => {
               border: "1px solid #ced4da",
               padding: "8px 12px",
               boxSizing: "border-box",
+              backgroundColor: "#f9f9f9",  // Light background color for input
             }}
           />
         </div>
@@ -135,7 +137,7 @@ const LoginPage = ({ onLogin }) => {
           style={{
             width: "100%",
             height: "38px",
-            backgroundColor: "#4154f1",
+            backgroundColor: "#454b1b",  // Updated button color to match AddMember
             color: "#fff",
             border: "none",
             borderRadius: "4px",

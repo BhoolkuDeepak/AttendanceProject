@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import GroupsIcon from "@mui/icons-material/Groups";
 import EventIcon from "@mui/icons-material/Event";
 import DataUsageIcon from "@mui/icons-material/DataUsage";
@@ -8,6 +8,7 @@ import HomeIcon from "@mui/icons-material/Home";
 
 const Sidebar = ({ onLogout, setSidebarWidth }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const location = useLocation();  // Hook to get the current route path
 
   const updateSidebarWidth = useCallback(() => {
     setSidebarWidth(isHovered ? 200 : 60);
@@ -16,6 +17,9 @@ const Sidebar = ({ onLogout, setSidebarWidth }) => {
   useEffect(() => {
     updateSidebarWidth();
   }, [updateSidebarWidth]);
+
+  // Function to check if the link is the current active path
+  const isActive = (path) => location.pathname === path;
 
   return (
     <div
@@ -26,24 +30,33 @@ const Sidebar = ({ onLogout, setSidebarWidth }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <nav className="flex flex-col gap-5">
-        <NavItem to="/" icon={<HomeIcon />} text="Home" isHovered={isHovered} />
+        <NavItem
+          to="/"
+          icon={<HomeIcon />}
+          text="Home"
+          isHovered={isHovered}
+          isActive={isActive("/")}
+        />
         <NavItem
           to="/attendance"
           icon={<DataUsageIcon />}
           text="Attendance"
           isHovered={isHovered}
+          isActive={isActive("/attendance")}
         />
         <NavItem
           to="/events"
           icon={<EventIcon />}
           text="Events"
           isHovered={isHovered}
+          isActive={isActive("/events")}
         />
         <NavItem
           to="/members"
           icon={<GroupsIcon />}
           text="Members"
           isHovered={isHovered}
+          isActive={isActive("/members")}
         />
         <NavItemLogout onLogout={onLogout} isHovered={isHovered} />
       </nav>
@@ -51,10 +64,14 @@ const Sidebar = ({ onLogout, setSidebarWidth }) => {
   );
 };
 
-const NavItem = ({ to, icon, text, isHovered }) => (
+const NavItem = ({ to, icon, text, isHovered, isActive }) => (
   <Link
     to={to}
-    className="flex items-center p-2 rounded-md text-[rgb(69,75,27)] hover:text-green-700 transition-all"
+    className={`flex items-center p-2 rounded-md transition-all ${
+      isActive
+        ? "text-green-700" // Active state color (same as hover)
+        : "text-[rgb(69,75,27)] hover:text-green-700"
+    }`}
   >
     <span className="w-6 h-6 flex-shrink-0">{icon}</span>
     <span className={`ml-3 transition-opacity ${isHovered ? "opacity-100" : "hidden"}`}>
@@ -78,4 +95,3 @@ const NavItemLogout = ({ onLogout, isHovered }) => (
 );
 
 export default Sidebar;
- 

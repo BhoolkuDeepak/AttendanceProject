@@ -78,5 +78,16 @@
       16,
       17
     ]
+  },
+  {
+    "AttendanceId": 8,
+    "EventId": 7,
+    "AttendedMembers": [
+      8,
+      9,
+      10,
+      13,
+      16
+    ]
   }
 ]

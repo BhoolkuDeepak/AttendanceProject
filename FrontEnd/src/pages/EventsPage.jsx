@@ -12,7 +12,7 @@ function EventsPage() {
   const [isHovered, setIsHovered] = useState(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isManuallyNavigated, setIsManuallyNavigated] = useState(false);
- 
+
   useEffect(() => {
     fetch("http://localhost:5105/api/attendance/events")
       .then((response) => response.json())
@@ -21,7 +21,12 @@ function EventsPage() {
   }, []);
 
   useEffect(() => {
-    if (events.length > 0 && !isHovered && !isMouseDown && !isManuallyNavigated) {
+    if (
+      events.length > 0 &&
+      !isHovered &&
+      !isMouseDown &&
+      !isManuallyNavigated
+    ) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % events.length);
       }, 3000);
@@ -58,16 +63,18 @@ function EventsPage() {
           style={{ fontSize: 40 }}
         />
       </div>
-
+      <EventAttendanceGraph />
       <EventList
         events={events}
         currentIndex={currentIndex}
         onNavigate={handleManualNavigation}
       />
-      <EventAttendanceGraph />
+   
 
       {isAddEventModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div
+          className="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50"
+        >
           <div className="rounded-lg shadow-lg p-6 w-11/12 md:w-1/2 lg:w-1/3 transition-transform transform scale-95 animate-fade-in relative">
             <button
               onClick={() => setAddEventModalOpen(false)}

@@ -118,5 +118,13 @@
     "Location": "Office",
     "IsRecurring": false,
     "RecurringDay": ""
+  },
+  {
+    "EventId": 17,
+    "EventName": "Introduction",
+    "Timings": "11:00 PM",
+    "Location": "Online",
+    "IsRecurring": true,
+    "RecurringDay": "Tuesday"
   }
 ]
