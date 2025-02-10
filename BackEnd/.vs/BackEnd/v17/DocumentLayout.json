@@ -83,11 +83,8 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-31T07:25:31.879Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -99,7 +96,8 @@
               "RelativeToolTip": "BackEnd.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-02-03T09:59:02.311Z"
+              "WhenOpened": "2025-02-03T09:59:02.311Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -111,7 +109,12 @@
               "RelativeToolTip": "BackEnd.csproj.user",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
-              "WhenOpened": "2025-02-03T09:59:01.885Z"
+              "WhenOpened": "2025-02-03T09:59:01.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
@@ -123,7 +126,8 @@
               "RelativeToolTip": "Data\\attendance.json",
               "ViewState": "AgIAAJkAAAAAAAAAAAAIwK8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-02-03T08:01:59.118Z"
+              "WhenOpened": "2025-02-03T08:01:59.118Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -135,7 +139,8 @@
               "RelativeToolTip": "Models\\Attendance.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T08:01:55.471Z"
+              "WhenOpened": "2025-02-03T08:01:55.471Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -147,7 +152,8 @@
               "RelativeToolTip": "Models\\Member.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T08:01:40.804Z"
+              "WhenOpened": "2025-02-03T08:01:40.804Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -159,7 +165,8 @@
               "RelativeToolTip": "Controllers\\AttendanceController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T06:47:28.578Z"
+              "WhenOpened": "2025-02-03T06:47:28.578Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -171,7 +178,8 @@
               "RelativeToolTip": "BackEnd.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-02-03T06:14:37.902Z"
+              "WhenOpened": "2025-02-03T06:14:37.902Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -183,7 +191,8 @@
               "RelativeToolTip": "Models\\Event.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-02T09:47:54.967Z"
+              "WhenOpened": "2025-02-02T09:47:54.967Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -195,7 +204,8 @@
               "RelativeToolTip": "Data\\members.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-31T08:05:19.133Z"
+              "WhenOpened": "2025-01-31T08:05:19.133Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -207,7 +217,8 @@
               "RelativeToolTip": "Data\\events.json",
               "ViewState": "AgIAAE0AAAAAAAAAAAAIwFoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-31T08:05:17.873Z"
+              "WhenOpened": "2025-01-31T08:05:17.873Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -219,7 +230,8 @@
               "RelativeToolTip": "Services\\JsonService.cs",
               "ViewState": "AgIAAGAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T08:04:32.248Z"
+              "WhenOpened": "2025-01-31T08:04:32.248Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -227,9 +239,9 @@
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\2020704\\source\\repos\\GameStoresr\\Project\\Project-React-.Net\\BackEnd\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\2020704\\source\\repos\\GameStoresr\\Project\\Project-React-.Net\\BackEnd\\appsettings.json*",
-              "RelativeToolTip": "appsettings.json*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\2020704\\source\\repos\\GameStoresr\\Project\\Project-React-.Net\\BackEnd\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-01-31T07:40:07.507Z",
               "EditorCaption": ""
@@ -244,7 +256,8 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAAAAAEYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T07:29:38.44Z"
+              "WhenOpened": "2025-01-31T07:29:38.44Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -256,7 +269,8 @@
               "RelativeToolTip": "Controllers\\AuthController.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T07:24:42.154Z"
+              "WhenOpened": "2025-01-31T07:24:42.154Z",
+              "EditorCaption": ""
             }
           ]
         }

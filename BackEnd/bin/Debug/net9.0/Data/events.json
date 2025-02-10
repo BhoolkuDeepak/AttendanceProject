@@ -1,122 +1,90 @@
 [
-  {
-    "EventId": 2,
-    "EventName": "Quiz",
-    "Timings": "6:00 AM",
-    "Location": "Online",
-    "IsRecurring": true,
-    "RecurringDay": "Monday"
-  },
-  {
-    "EventId": 3,
-    "EventName": "Team Meeting",
-    "Timings": "10:00 AM",
-    "Location": "Office Conference Room",
-    "IsRecurring": true,
-    "RecurringDay": "Tuesday"
-  },
-  {
-    "EventId": 4,
-    "EventName": "Cricket Match",
-    "Timings": "6:00 PM",
-    "Location": "Thane",
-    "IsRecurring": true,
-    "RecurringDay": "Friday"
-  },
-  {
-    "EventId": 5,
-    "EventName": "Team Meeting",
-    "Timings": "10:00 AM",
-    "Location": "Office Conference Room",
-    "IsRecurring": true,
-    "RecurringDay": "Tuesday"
-  },
-  {
-    "EventId": 6,
-    "EventName": "Diwali Celebration",
-    "Timings": "9:00 AM",
-    "Location": "Andheri",
-    "IsRecurring": false,
-    "RecurringDay": ""
-  },
-  {
-    "EventId": 7,
-    "EventName": "Wedding Reception",
-    "Timings": "7:00 PM",
-    "Location": "Mumbai",
-    "IsRecurring": false,
-    "RecurringDay": ""
-  },
-  {
-    "EventId": 8,
-    "EventName": "Yoga Session",
-    "Timings": "5:30 AM",
-    "Location": "Online",
-    "IsRecurring": true,
-    "RecurringDay": "Monday"
-  },
-  {
-    "EventId": 9,
-    "EventName": "Hackathon",
-    "Timings": "10:00 AM",
-    "Location": "Pune",
-    "IsRecurring": true,
-    "RecurringDay": "Saturday"
-  },
-  {
-    "EventId": 10,
-    "EventName": "Movie Night",
-    "Timings": "9:00 PM",
-    "Location": "Vikas Mall",
-    "IsRecurring": false,
-    "RecurringDay": ""
-  },
-  {
-    "EventId": 11,
-    "EventName": "Annual Day Celebration",
-    "Timings": "5:00 PM",
-    "Location": "Mumbai",
-    "IsRecurring": false,
-    "RecurringDay": ""
-  },
-  {
-    "EventId": 12,
-    "EventName": "Workshop on AI",
-    "Timings": "2:00 PM",
-    "Location": "Bangalore",
-    "IsRecurring": false,
-    "RecurringDay": ""
-  },
-  {
-    "EventId": 13,
-    "EventName": "Christmas",
-    "Timings": "11:00 PM",
-    "Location": "India",
-    "IsRecurring": false,
-    "RecurringDay": ""
-  },
-  {
-    "EventId": 14,
-    "EventName": "Christmas Party",
-    "Timings": "9:00 PM",
-    "Location": "Office",
-    "IsRecurring": false,
-    "RecurringDay": ""
-  },
-  {
-    "EventId": 15,
-    "EventName": "Constitution Day",
-    "Timings": "10:00 AM",
-    "Location": "Mumbai",
-    "IsRecurring": true,
-    "RecurringDay": "Monday"
-  },
-  {
-    "EventId": 16,
-    "EventName": "Holi ",
-    "Timings": "10:00 AM",
-    "Location": "Office",
-    "IsRecurring": false,
-    "RecurringDay": ""
-  }
+    {
+        "EventId": 2,
+        "EventName": "Quiz",
+        "Timings": "6:00 AM",
+        "Location": "Online",
+        "IsRecurring": true,
+        "RecurringDay": "Monday"
+    },
+    {
+        "EventId": 3,
+        "EventName": "Team Meeting",
+        "Timings": "10:00 AM",
+        "Location": "Office Conference Room",
+        "IsRecurring": true,
+        "RecurringDay": "Tuesday"
+    },
+    {
+        "EventId": 4,
+        "EventName": "Cricket Match",
+        "Timings": "6:00 PM",
+        "Location": "Thane",
+        "IsRecurring": true,
+        "RecurringDay": "Friday"
+    },
+    {
+        "EventId": 5,
+        "EventName": "Team Meeting",
+        "Timings": "10:00 AM",
+        "Location": "Office Conference Room",
+        "IsRecurring": true,
+        "RecurringDay": "Tuesday"
+    },
+    {
+        "EventId": 6,
+        "EventName": "Diwali Celebration",
+        "Timings": "9:00 AM",
+        "Location": "Andheri",
+        "IsRecurring": false,
+        "RecurringDay": ""
+    },
+    {
+        "EventId": 7,
+        "EventName": "Wedding Reception",
+        "Timings": "7:00 PM",
+        "Location": "Mumbai",
+        "IsRecurring": false,
+        "RecurringDay": ""
+    },
+    {
+        "EventId": 8,
+        "EventName": "Yoga Session",
+        "Timings": "5:30 AM",
+        "Location": "Online",
+        "IsRecurring": true,
+        "RecurringDay": "Monday"
+    },
+    {
+        "EventId": 9,
+        "EventName": "Hackathon",
+        "Timings": "10:00 AM",
+        "Location": "Pune",
+        "IsRecurring": true,
+        "RecurringDay": "Saturday"
+    },
+    {
+        "EventId": 10,
+        "EventName": "Movie Night",
+        "Timings": "9:00 PM",
+        "Location": "Vikas Mall",
+        "IsRecurring": false,
+        "RecurringDay": ""
+    },
+    {
+        "EventId": 11,
+        "EventName": "Annual Day Celebration",
+        "Timings": "5:00 PM",
+        "Location": "Mumbai",
+        "IsRecurring": false,
+        "RecurringDay": ""
+    },
+    {
+        "EventId": 12,
+        "EventName": "Workshop on AI",
+        "Timings": "2:00 PM",
+        "Location": "Bangalore",
+        "IsRecurring": false,
+        "RecurringDay": ""
+    }
 ]

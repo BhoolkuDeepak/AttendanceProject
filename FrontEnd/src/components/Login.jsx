@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Alert } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Container,
+  Paper,
+  Typography,
+  Alert,
+} from "@mui/material";
 
-const LoginPage = ({ onLogin }) => {
+  import IconButton from "@mui/material/IconButton";
+  import Fingerprint from "@mui/icons-material/Fingerprint";
+  import { useState, useEffect } from "react";
+  import "./index.css";
+  import { motion } from "framer-motion";
+  import Login from "./components/Login";
+
+  
+function Login({ onLogin }) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isVisible, setIsVisible] = useState(false);
-
+  const text = "Login";
   useEffect(() => {
-    setTimeout(() => setIsVisible(true), 100); // Delay for smooth entry
-
-    // Check if the user details were saved in localStorage (without "Remember me")
-    const savedUser = localStorage.getItem("rememberUser");
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      setName(user.Username);
-      setPassword(user.Password);
-    }
+    setTimeout(() => setIsVisible(true), 100); 
   }, []);
 
   const handleSubmit = async (e) => {
@@ -32,9 +38,7 @@ const LoginPage = ({ onLogin }) => {
     const data = await response.json();
 
     if (data.token) {
-      // Store JWT Token in localStorage
       localStorage.setItem("jwtToken", data.token);
-
       onLogin();
     } else {
       setError("Invalid credentials!");
@@ -42,115 +46,112 @@ const LoginPage = ({ onLogin }) => {
   };
 
   return (
-    <div
-      style={{
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: "100%",
         height: "100vh",
-        backgroundColor: "#f0f4fb",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          backgroundColor: "#fff",
-          borderRadius: "4px",
-          boxShadow: "0 0 1px rgba(0, 0, 0, 0.2)",
-          padding: "48px 49px",
-          boxSizing: "border-box",
-          width: "400px",
+      <Paper
+        elevation={3}
+        sx={{
+          backgroundColor: "rgba(255, 255, 255, 0.7)", 
+          backdropFilter: "blur(10px)",
+          padding: 3,
+          width: "75%",
+          textAlign: "center",
+          borderRadius: "12px", 
+          boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", 
+          border: "1px solid rgba(255, 255, 255, 0.2)",
         }}
       >
-        <h2
-          style={{
-            textAlign: "center",
-            fontFamily: "Roboto",
-            fontSize: "24px",
-            color: "#4154f1",
-            marginBottom: "20px",
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{
+            display: "flex", 
+            justifyContent: "center",
+            fontWeight: "bold",
+            color: "#1976d2",
+            fontFamily: "'Bubblegum Sans', cursive", 
+            letterSpacing: "2px",
+            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.2)", 
           }}
         >
-          Login to Your Account
-        </h2>
-
-        <div style={{ marginBottom: "20px" }}>
-          <label
-            style={{
-              display: "block",
-              color: "#212529",
-              fontSize: "15px",
-              fontFamily: "Roboto",
-              marginBottom: "8px",
+          {text.split("").map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: index * 0.1, 
+                duration: 0.5,
+                ease: "easeOut",
+              }}
+            >
+              {char}
+            </motion.span>
+          ))}
+        </Typography>
+        {error && <Alert severity="error">{error}</Alert>}
+        <form onSubmit={handleSubmit}>
+          <TextField
+            id="outlined-basic"
+            label="Username"
+            sx={{
+              m: 2,
+              "& .MuiInputLabel-root": {
+                fontFamily: "'Bubblegum Sans', cursive", 
+                letterSpacing: "1px",
+                fontSize: "1.1rem", 
+              },
             }}
-          >
-            Username
-          </label>
-          <input
-            type="text"
+            variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{
-              width: "100%",
-              height: "38px",
-              borderRadius: "4px",
-              border: "1px solid #ced4da",
-              padding: "8px 12px",
-              boxSizing: "border-box",
-            }}
           />
-        </div>
 
-        <div style={{ marginBottom: "20px" }}>
-          <label
-            style={{
-              display: "block",
-              color: "#212529",
-              fontSize: "14px",
-              fontFamily: "Roboto",
-              marginBottom: "8px",
+          <TextField
+            id="outlined-basic"
+            label="Password"
+            sx={{
+              m: 2,
+              "& .MuiInputLabel-root": {
+                fontFamily: "'Bubblegum Sans', cursive", 
+                letterSpacing: "1px",
+                fontSize: "1.1rem",
+              },
             }}
-          >
-            Password
-          </label>
-          <input
+            variant="outlined"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: "100%",
-              height: "38px",
-              borderRadius: "4px",
-              border: "1px solid #ced4da",
-              padding: "8px 12px",
-              boxSizing: "border-box",
-            }}
           />
-        </div>
 
-        <button
-          onClick={handleSubmit}
-          style={{
-            width: "100%",
-            height: "38px",
-            backgroundColor: "#4154f1",
-            color: "#fff",
-            border: "none",
-            borderRadius: "4px",
-            fontSize: "16px",
-            cursor: "pointer",
-            marginBottom: "20px",
-          }}
-        >
-          Sign in
-        </button>
-
-        {error && <Alert severity="error">{error}</Alert>}
-      </div>
-    </div>
+          <br />
+          {/* <Button type="submit" variant="contained" color="primary" fullWidth sx={{ marginTop: 2 }}>Login</Button> */}
+          <IconButton
+            type="submit"
+            aria-label="fingerprint"
+            color="primary"
+            sx={{
+              m: 2,
+              transition: "transform 0.2s ease-in-out", 
+              "&:hover": {
+                transform: "scale(1.3)",
+              },
+            }}
+          >
+            <Fingerprint />
+          </IconButton>
+        </form>
+      </Paper>
+    </Container>
   );
-};
+}
 
-export default LoginPage;
+export default Login;

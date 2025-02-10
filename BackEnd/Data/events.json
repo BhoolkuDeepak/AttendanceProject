@@ -102,21 +102,5 @@
     "Location": "Office",
     "IsRecurring": false,
     "RecurringDay": ""
-  },
-  {
-    "EventId": 15,
-    "EventName": "Constitution Day",
-    "Timings": "10:00 AM",
-    "Location": "Mumbai",
-    "IsRecurring": true,
-    "RecurringDay": "Monday"
-  },
-  {
-    "EventId": 16,
-    "EventName": "Holi ",
-    "Timings": "10:00 AM",
-    "Location": "Office",
-    "IsRecurring": false,
-    "RecurringDay": ""
   }
 ]

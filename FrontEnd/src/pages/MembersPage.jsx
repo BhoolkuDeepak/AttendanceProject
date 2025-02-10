@@ -1,19 +1,16 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
+import AddMember from "../components/AddMember";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import AddMember from "../components/AddMember";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
 function MembersPage() {
   const [members, setMembers] = useState([]);
-  const [deletedMember, setDeletedMember] = useState(null);
+  const navigate = useNavigate();
   const [loadMembers, setLoadMembers] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
- 
+
   useEffect(() => {
     if (loadMembers) {
       fetch("http://localhost:5105/api/attendance/members")
@@ -23,92 +20,122 @@ function MembersPage() {
       setLoadMembers(false);
     }
   }, [loadMembers]);
-
-  useEffect(() => {
-    if (members.length > 0 && !isHovered) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % members.length);
-      }, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [members, isHovered]);
-
+  const updateMember = (memberId) => {
+    navigate(``);
+  };
   const deleteMember = (memberId) => {
-    setDeletedMember(memberId);
-    setTimeout(() => {
-      setMembers((prevMembers) =>
-        prevMembers.filter((member) => member.memberId !== memberId)
-      );
-      fetch(`http://localhost:5105/api/attendance/members/${memberId}`, {
-        method: "DELETE",
-      }).catch((error) => console.error("Error deleting member:", error));
-    }, 1000);
-  };
-
-  const nextMember = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % members.length);
-  };
-
-  const prevMember = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + members.length) % members.length);
+    console.log("Deleting member with ID:", memberId); 
+    
+    fetch(`http://localhost:5105/api/attendance/members/${memberId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          setMembers((prevMembers) =>
+            prevMembers.filter((member) => member.memberId !== memberId)
+          );
+        } else {
+          console.error("Error deleting member");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting member:", error);
+      });
   };
 
   return (
-    <div className="flex h-screen bg-[rgb(245,245,240)]">
-      <div className="w-1/2 p-6 flex flex-col justify-center items-center ">
-        <AddMember />
-      </div>
-
-      <div className="w-1/2 p-6 flex flex-col items-center justify-center relative overflow-hidden">
-        <h2 className="text-3xl font-bold text-[rgb(69,75,27)] mb-6">Members</h2>
-        <div 
-          className="relative w-full max-w-lg h-96 flex items-center justify-center overflow-hidden"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          {members.length === 0 ? (
-            <p className="text-center text-gray-500">No members found.</p>
-          ) : (
+    <div className="p-6 bg-white rounded-xl shadow-lg mt-8 w-full mx-auto border border-gray-200">
+      <Routes>
+        <Route
+          path="/"
+          element={
             <>
-              <IconButton
-                onClick={prevMember}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2  hover:text-green-700"
-              >
-                <ArrowBackIosIcon />
-              </IconButton>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={members[currentIndex]?.memberId}
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0, transition: { duration: 0.8 } }}
-                  exit={{ opacity: 0, x: -100, transition: { duration: 0.8 } }}
-                  className="w-full flex flex-col items-center text-center"
+              <h2 className="text-3xl font-bold text-blue-700 text-center mb-6">
+                Members
+              </h2>
+              {members.length === 0 ? (
+                <p className="text-center text-gray-500">No members found.</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {members.map((member) => (
+                    <div
+                      key={member.memberId}
+                      className="p-4 bg-blue-100 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
+                    >
+                      <div className="flex items-center gap-4">
+                        <PersonIcon className="text-blue-600 text-4xl" />
+                        <div>
+                          <h3 className="text-xl font-semibold text-blue-800">
+                            {member.name}
+                          </h3>
+                          <p className="text-sm text-blue-600">
+                            {member.contact}
+                          </p>
+                        </div>
+                      </div>
+
+
+                      <IconButton
+                        onClick={() => deleteMember(member.memberId)}
+                        // className="text-red-500 hover:text-red-700 hover:scale-110 transition-transform duration-200"
+                        disableRipple
+                      >
+                        <DeleteIcon
+                          sx={{ fontSize: "1.25rem" }}
+                          className="hover:text-red-700"
+                        />
+                      </IconButton>
+                      <Link
+                        to={`/members/update/${member.memberId}`}
+                        className="text-blue-500"
+                      >
+                        <ChangeCircleIcon
+                          sx={{ fontSize: "1.25rem" }}
+                          className="hover:text-blue-700"
+                        />
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className="mt-8 text-center">
+                <button
+                  onClick={() => {
+                    navigate("/members/add");
+                  }}
+                  className="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition"
                 >
-                  <PersonIcon className="text-[rgb(69,75,27)] text-6xl mb-4" />
-                  <h3 className="text-2xl font-semibold text-[rgb(69,75,27)]">{members[currentIndex]?.name}</h3>
-                  {/* <p className="text-gray-600 text-lg">{members[currentIndex]?.contact}</p> */}
-                  <IconButton
-                    onClick={() => deleteMember(members[currentIndex]?.memberId)}
-                    disableRipple
-                    className="mt-4"
-                  >
-                    <DeleteIcon
-                      sx={{ fontSize: "1.75rem" }}
-                      className="text-[rgb(69,75,27)] hover:text-green-700"
-                    />
-                  </IconButton>
-                </motion.div>
-              </AnimatePresence>
-              <IconButton
-                onClick={nextMember}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2   hover:bg-gray-200"
-              >
-                <ArrowForwardIosIcon />
-              </IconButton>
+                  Add Member
+                </button>
+              </div>
             </>
-          )}
-        </div>
-      </div>
+          }
+        />
+
+        <Route
+          path="/add"
+          element={
+            <>
+              <h2 className="text-3xl font-bold text-blue-700 text-center mb-6">
+                Add Member
+              </h2>
+              <AddMember />
+              <div className="mt-4 text-center">
+                <button
+                  onClick={() => {
+                    navigate("/members");
+                    setLoadMembers(true); 
+                  }}
+                  className="px-4 py-2 bg-gray-500 text-white rounded-lg shadow-md hover:bg-gray-600 transition"
+                >
+                  Back to Members
+                </button>
+              </div>
+            </>
+          }
+        />
+      </Routes>
     </div>
   );
 }
