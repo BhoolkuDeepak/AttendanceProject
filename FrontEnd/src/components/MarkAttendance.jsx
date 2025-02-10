@@ -40,16 +40,22 @@ function MarkAttendance() {
     }
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5105/api/attendance/attendance", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ eventId: selectedEvent, memberIds: selectedMembers }),
-      });
+      const response = await fetch(
+        "http://localhost:5105/api/attendance/attendance",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            EventId: selectedEvent,
+            AttendedMembers: selectedMembers,
+          }),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to mark attendance");
       }
       alert("Attendance marked successfully!");
-      setSelectedMembers([]);
+      setSelectedMembers([]); // Reset the selected members
       fetchEventsAndMembers(); // Refresh data
     } catch (error) {
       alert(error.message);
@@ -60,11 +66,15 @@ function MarkAttendance() {
 
   return (
     <div className="relative p-6 rounded-lg w-11/12 md:w-3/4 lg:w-1/2 mx-auto mt-10">
-      <h2 className="text-3xl font-bold text-[rgb(69,75,27)] text-center mb-6">Mark Attendance</h2>
+      <h2 className="text-3xl font-bold text-[rgb(69,75,27)] text-center mb-6">
+        Mark Attendance
+      </h2>
 
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700">Event</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Event
+          </label>
           <select
             value={selectedEvent}
             onChange={(e) => setSelectedEvent(e.target.value)}
@@ -73,19 +83,25 @@ function MarkAttendance() {
           >
             <option value="">Select Event</option>
             {events.map((event) => (
-              <option key={event.eventId} value={event.eventId}>{event.eventName}</option>
+              <option key={event.eventId} value={event.eventId}>
+                {event.eventName}
+              </option>
             ))}
           </select>
         </div>
 
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700">Members</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Members
+          </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
             {members.map((member) => (
               <div
                 key={member.memberId}
                 className={`p-4 rounded-lg border cursor-pointer transition-all duration-300 ${
-                  selectedMembers.includes(member.memberId) ? 'bg-[rgb(69,75,27)] text-white' : 'bg-gray-100 hover:bg-gray-200'
+                  selectedMembers.includes(member.memberId)
+                    ? "bg-[rgb(69,75,27)] text-white"
+                    : "bg-gray-100 hover:bg-gray-200"
                 }`}
                 onClick={() => handleCheckboxChange(member.memberId)}
               >
@@ -99,7 +115,9 @@ function MarkAttendance() {
         <button
           type="submit"
           className={`w-full p-3 text-white rounded-md ${
-            loading ? 'bg-gray-700 cursor-not-allowed' : 'bg-[rgb(69,75,27)] hover:bg-[rgb(55,65,25)]'
+            loading
+              ? "bg-gray-700 cursor-not-allowed"
+              : "bg-[rgb(69,75,27)] hover:bg-[rgb(55,65,25)]"
           } transition-all duration-300`}
           disabled={loading || selectedMembers.length === 0}
         >

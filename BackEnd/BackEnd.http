@@ -18,6 +18,16 @@ GET http://localhost:5105/api/attendance/attendance
 
 
 ###
+POST http://localhost:5105/api/attendance/attendance
+Content-Type: application/json
+
+{
+  "EventId": 16,
+  "AttendedMembers": [1, 2, 3]
+}
+
+
+###
 
 
 ### Admin Login Request
