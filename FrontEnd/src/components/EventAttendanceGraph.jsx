@@ -39,8 +39,8 @@ function EventAttendanceGraph() {
       {
         label: "Attendees",
         data: attendeeCounts,
-        backgroundColor: 'rgba(59, 130, 246, 0.2)',
-        borderColor: 'rgba(59, 130, 246, 1)',
+        backgroundColor: 'rgb(69,75,27,0.2)',
+        borderColor: 'rgba(69,75,27, 1)',
         borderWidth: 1,
       },
     ],
@@ -52,6 +52,9 @@ function EventAttendanceGraph() {
       title: {
         display: true,
         text: 'Event Attendance Count',
+      },
+      tooltip: {
+        enabled: false, 
       },
     },
     onHover: (event, elements) => {
@@ -72,7 +75,6 @@ function EventAttendanceGraph() {
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center relative">
       <div className="container mx-auto p-4">
-        <h2 className="text-2xl font-serif mb-6">Event Attendance</h2>
         <Bar data={data} options={options} />
       </div>
 
@@ -93,7 +95,7 @@ function EventAttendanceGraph() {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.3 }}
           >
-            <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+            <h2 className="text-2xl font-semibold text-[rgb(69,75,27)] mb-2">
               <TypeAnimation
                 sequence={[
                   events[hoveredBarIndex].eventName,
@@ -106,13 +108,11 @@ function EventAttendanceGraph() {
                 repeat={Infinity}
               />
             </h2>
-            <p className="text-gray-600 text-lg mb-1">
+            <p className="text-[rgb(69,75,27)] text-lg mb-1">
               <strong>Timings:</strong> {events[hoveredBarIndex].timings}
             </p>
-            <p className="text-gray-700 mb-2">
-              <strong>Details:</strong> {events[hoveredBarIndex].eventDetails}
-            </p>
-            <p className="text-blue-600 font-medium mt-2">
+         
+            <p className="text-[rgb(69,75,27)] font-medium mt-2">
               <strong>Attendees:</strong> {attendeeCounts[hoveredBarIndex]}
             </p>
           </motion.div>

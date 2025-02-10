@@ -1,7 +1,4 @@
 import { useState, useEffect } from "react";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { X as XIcon } from "@mui/icons-material";
-import { motion } from "framer-motion";
 
 function MarkAttendance() {
   const [events, setEvents] = useState([]);
@@ -10,7 +7,7 @@ function MarkAttendance() {
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const fetchData = () => {
     fetch("http://localhost:5105/api/attendance/events")
       .then((res) => res.json())
       .then((data) => setEvents(data))
@@ -20,6 +17,10 @@ function MarkAttendance() {
       .then((res) => res.json())
       .then((data) => setMembers(data))
       .catch((error) => console.error("Error fetching members:", error));
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   const handleCheckboxChange = (memberId) => {
@@ -29,6 +30,7 @@ function MarkAttendance() {
         : [...prevSelected, memberId]
     );
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedEvent || selectedMembers.length === 0) {
@@ -47,17 +49,16 @@ function MarkAttendance() {
       }
       alert("Attendance marked successfully!");
       setSelectedMembers([]);
-      refreshData();  // Fetch updated attendance
+      fetchData(); // ✅ Fetch updated data after marking attendance
     } catch (error) {
       alert(error.message);
     } finally {
       setLoading(false);
     }
   };
-  
-  
+
   return (
-    <div className="relative  p-6 rounded-lg  w-11/12 md:w-3/4 lg:w-1/2 mx-auto mt-10">
+    <div className="relative p-6 rounded-lg w-11/12 md:w-3/4 lg:w-1/2 mx-auto mt-10">
       <h2 className="text-3xl font-bold text-[rgb(69,75,27)] text-center mb-6">Mark Attendance</h2>
 
       <form onSubmit={handleSubmit}>

@@ -298,5 +298,29 @@
     "EventId": 13,
     "EventDate": "0001-01-01T00:00:00",
     "AttendedMembers": []
+  },
+  {
+    "AttendanceId": 34,
+    "EventId": 7,
+    "EventDate": "0001-01-01T00:00:00",
+    "AttendedMembers": []
+  },
+  {
+    "AttendanceId": 35,
+    "EventId": 7,
+    "EventDate": "0001-01-01T00:00:00",
+    "AttendedMembers": []
+  },
+  {
+    "AttendanceId": 36,
+    "EventId": 16,
+    "EventDate": "0001-01-01T00:00:00",
+    "AttendedMembers": []
+  },
+  {
+    "AttendanceId": 37,
+    "EventId": 16,
+    "EventDate": "0001-01-01T00:00:00",
+    "AttendedMembers": []
   }
 ]
