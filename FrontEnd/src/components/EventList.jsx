@@ -53,7 +53,7 @@ function EventList() {
           {events.map((event, index) => (
             <motion.div
               key={index}
-              className="flex-none bg-white rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
+              className="flex-none rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
               style={{
                 width: "300px",
                 height: "250px",
@@ -72,7 +72,7 @@ function EventList() {
         </motion.div>
       </div>
     </div>
-  );
-}
-
+  ); 
+} 
+ 
 export default EventList;

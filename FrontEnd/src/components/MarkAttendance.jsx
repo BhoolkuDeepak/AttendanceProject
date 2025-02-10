@@ -55,7 +55,7 @@ function MarkAttendance() {
     }
   };
   
- 
+  
   return (
     <div className="relative  p-6 rounded-lg  w-11/12 md:w-3/4 lg:w-1/2 mx-auto mt-10">
       <h2 className="text-3xl font-bold text-[rgb(69,75,27)] text-center mb-6">Mark Attendance</h2>

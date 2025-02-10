@@ -78,3 +78,4 @@ const NavItemLogout = ({ onLogout, isHovered }) => (
 );
 
 export default Sidebar;
+ 

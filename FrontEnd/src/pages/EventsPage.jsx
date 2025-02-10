@@ -12,7 +12,7 @@ function EventsPage() {
   const [isHovered, setIsHovered] = useState(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isManuallyNavigated, setIsManuallyNavigated] = useState(false);
-
+ 
   useEffect(() => {
     fetch("http://localhost:5105/api/attendance/events")
       .then((response) => response.json())

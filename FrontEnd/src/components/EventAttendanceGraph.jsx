@@ -79,7 +79,7 @@ function EventAttendanceGraph() {
       <AnimatePresence>
         {hoveredBarIndex !== null && events[hoveredBarIndex] && (
           <motion.div
-            className="absolute bg-white shadow-2xl text-left border border-gray-300 p-6 rounded-lg transition-all"
+            className="absolute  text-left   p-6 rounded-lg transition-all"
             style={{
               top: `${mousePosition.y + 20}px`,
               left: `${mousePosition.x + 20}px`,
@@ -121,5 +121,5 @@ function EventAttendanceGraph() {
     </div>
   );
 }
-
+ 
 export default EventAttendanceGraph;
