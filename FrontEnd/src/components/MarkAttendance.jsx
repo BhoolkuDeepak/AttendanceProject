@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { X as XIcon } from "@mui/icons-material";
 import { motion } from "framer-motion";
 
 function MarkAttendance() {
@@ -11,6 +9,10 @@ function MarkAttendance() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    fetchEventsAndMembers();
+  }, []);
+
+  const fetchEventsAndMembers = () => {
     fetch("http://localhost:5105/api/attendance/events")
       .then((res) => res.json())
       .then((data) => setEvents(data))
@@ -20,7 +22,7 @@ function MarkAttendance() {
       .then((res) => res.json())
       .then((data) => setMembers(data))
       .catch((error) => console.error("Error fetching members:", error));
-  }, []);
+  };
 
   const handleCheckboxChange = (memberId) => {
     setSelectedMembers((prevSelected) =>
@@ -29,6 +31,7 @@ function MarkAttendance() {
         : [...prevSelected, memberId]
     );
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedEvent || selectedMembers.length === 0) {
@@ -47,17 +50,16 @@ function MarkAttendance() {
       }
       alert("Attendance marked successfully!");
       setSelectedMembers([]);
-      refreshData();  // Fetch updated attendance
+      fetchEventsAndMembers(); // Refresh data
     } catch (error) {
       alert(error.message);
     } finally {
       setLoading(false);
     }
   };
-  
-  
+
   return (
-    <div className="relative  p-6 rounded-lg  w-11/12 md:w-3/4 lg:w-1/2 mx-auto mt-10">
+    <div className="relative p-6 rounded-lg w-11/12 md:w-3/4 lg:w-1/2 mx-auto mt-10">
       <h2 className="text-3xl font-bold text-[rgb(69,75,27)] text-center mb-6">Mark Attendance</h2>
 
       <form onSubmit={handleSubmit}>
@@ -82,7 +84,9 @@ function MarkAttendance() {
             {members.map((member) => (
               <div
                 key={member.memberId}
-                className={`p-4 rounded-lg border cursor-pointer transition-all duration-300 ${selectedMembers.includes(member.memberId) ? 'bg-[rgb(69,75,27)] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
+                className={`p-4 rounded-lg border cursor-pointer transition-all duration-300 ${
+                  selectedMembers.includes(member.memberId) ? 'bg-[rgb(69,75,27)] text-white' : 'bg-gray-100 hover:bg-gray-200'
+                }`}
                 onClick={() => handleCheckboxChange(member.memberId)}
               >
                 <h3 className="text-lg font-semibold">{member.name}</h3>
@@ -94,7 +98,9 @@ function MarkAttendance() {
 
         <button
           type="submit"
-          className={`w-full p-3 text-white rounded-md ${loading ? 'bg-gray-700 cursor-not-allowed' : 'bg-[rgb(69,75,27)] hover:bg-[rgb(55,65,25)]'} transition-all duration-300`}
+          className={`w-full p-3 text-white rounded-md ${
+            loading ? 'bg-gray-700 cursor-not-allowed' : 'bg-[rgb(69,75,27)] hover:bg-[rgb(55,65,25)]'
+          } transition-all duration-300`}
           disabled={loading || selectedMembers.length === 0}
         >
           {loading ? "Submitting..." : "Submit"}

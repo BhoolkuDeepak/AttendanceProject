@@ -256,47 +256,5 @@
     "EventId": 16,
     "EventDate": "0001-01-01T00:00:00",
     "AttendedMembers": []
-  },
-  {
-    "AttendanceId": 27,
-    "EventId": 15,
-    "EventDate": "0001-01-01T00:00:00",
-    "AttendedMembers": []
-  },
-  {
-    "AttendanceId": 28,
-    "EventId": 15,
-    "EventDate": "0001-01-01T00:00:00",
-    "AttendedMembers": []
-  },
-  {
-    "AttendanceId": 29,
-    "EventId": 12,
-    "EventDate": "0001-01-01T00:00:00",
-    "AttendedMembers": []
-  },
-  {
-    "AttendanceId": 30,
-    "EventId": 15,
-    "EventDate": "0001-01-01T00:00:00",
-    "AttendedMembers": []
-  },
-  {
-    "AttendanceId": 31,
-    "EventId": 15,
-    "EventDate": "0001-01-01T00:00:00",
-    "AttendedMembers": []
-  },
-  {
-    "AttendanceId": 32,
-    "EventId": 6,
-    "EventDate": "0001-01-01T00:00:00",
-    "AttendedMembers": []
-  },
-  {
-    "AttendanceId": 33,
-    "EventId": 13,
-    "EventDate": "0001-01-01T00:00:00",
-    "AttendedMembers": []
   }
 ]
