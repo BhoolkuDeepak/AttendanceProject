@@ -2,7 +2,112 @@
   {
     "AttendanceId": 1,
     "EventId": 16,
-    "EventDate": "0001-01-01T00:00:00",
+    "AttendedMembers": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "AttendanceId": 2,
+    "EventId": 11,
     "AttendedMembers": []
+  },
+  {
+    "AttendanceId": 3,
+    "EventId": 4,
+    "AttendedMembers": [
+      8,
+      9,
+      10,
+      12,
+      13,
+      15,
+      16
+    ]
+  },
+  {
+    "AttendanceId": 4,
+    "EventId": 3,
+    "AttendedMembers": [
+      8,
+      9,
+      10,
+      13,
+      15
+    ]
+  },
+  {
+    "AttendanceId": 5,
+    "EventId": 10,
+    "AttendedMembers": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      17,
+      14,
+      8,
+      9,
+      10
+    ]
+  },
+  {
+    "AttendanceId": 6,
+    "EventId": 9,
+    "AttendedMembers": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      16,
+      15,
+      14
+    ]
+  },
+  {
+    "AttendanceId": 7,
+    "EventId": 6,
+    "AttendedMembers": [
+      15,
+      14,
+      13,
+      16,
+      17
+    ]
+  },
+  {
+    "AttendanceId": 8,
+    "EventId": 7,
+    "AttendedMembers": [
+      8,
+      9,
+      10,
+      13,
+      16
+    ]
+  },
+  {
+    "AttendanceId": 9,
+    "EventId": 15,
+    "AttendedMembers": [
+      8,
+      9,
+      12,
+      15,
+      17
+    ]
+  },
+  {
+    "AttendanceId": 10,
+    "EventId": 4,
+    "AttendedMembers": [
+      8,
+      9,
+      11
+    ]
   }
 ]
