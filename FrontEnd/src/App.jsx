@@ -1,3 +1,4 @@
+import { FetchProvider } from "./components/FetchContext";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
@@ -35,71 +36,76 @@ const App = () => {
       {!isAuthenticated ? (
         <Login onLogin={handleLogin} />
       ) : (
-        <Router>
-          <div className="relative min-h-screen flex overflow-hidden bg-[rgb(245,245,240)]">
-            <Sidebar onLogout={handleLogout} setSidebarWidth={setSidebarWidth} />
+        <FetchProvider>
+          <Router>
+            <div className="relative min-h-screen flex overflow-hidden bg-[rgb(245,245,240)]">
+              <Sidebar
+                onLogout={handleLogout}
+                setSidebarWidth={setSidebarWidth}
+              />
 
-            {/* Content Section */}
-            <div
-              className="flex-grow p-4 transition-all duration-300"
-              style={{ marginLeft: `${sidebarWidth}px` }}
-            >
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <ProtectedRoute>
-                      <HomePage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/events/*"
-                  element={
-                    <ProtectedRoute>
-                      <EventsPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/members/*"
-                  element={
-                    <ProtectedRoute>
-                      <MembersPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/attendance"
-                  element={
-                    <ProtectedRoute>
-                      <MarkAttendance />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/members/update/:id"
-                  element={
-                    <ProtectedRoute>
-                      <UpdateMember />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/attendance-graph"
-                  element={
-                    <ProtectedRoute>
-                      <EventAttendanceGraph />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
+              {/* Content Section */}
+              <div
+                className="flex-grow p-4 transition-all duration-300"
+                style={{ marginLeft: `${sidebarWidth}px` }}
+              >
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <ProtectedRoute>
+                        <HomePage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/events/*"
+                    element={
+                      <ProtectedRoute>
+                        <EventsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/members/*"
+                    element={
+                      <ProtectedRoute>
+                        <MembersPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/attendance"
+                    element={
+                      <ProtectedRoute>
+                        <MarkAttendance />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/members/update/:id"
+                    element={
+                      <ProtectedRoute>
+                        <UpdateMember />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/attendance-graph"
+                    element={
+                      <ProtectedRoute>
+                        <EventAttendanceGraph />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Routes>
+              </div>
             </div>
-          </div>
-        </Router>
+          </Router>
+        </FetchProvider>
       )}
     </>
   );
 };
- 
+
 export default App;

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useFetchTrigger } from "../components/FetchContext";
 
 function MarkAttendance() {
   const [events, setEvents] = useState([]);
@@ -7,7 +8,12 @@ function MarkAttendance() {
   const [selectedEvent, setSelectedEvent] = useState("");
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const { fetchTrigger } = useFetchTrigger();
+  useEffect(() => {
+    if (fetchTrigger === "attendance") {
+      fetchEventsAndMembers();
+    }
+  }, [fetchTrigger]);
   useEffect(() => {
     fetchEventsAndMembers();
   }, []);

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using BackEnd.Services;
 
 namespace BackEnd
 {
@@ -20,16 +21,22 @@ namespace BackEnd
                 {
                     webBuilder.ConfigureServices(services =>
                     {
-                        services.AddSingleton<JsonService>();  
-                        services.AddControllers();  
+                        // services.AddSingleton<JsonService>();
+                        services.AddSingleton<FileService>();
+                        services.AddSingleton<EventService>();
+                        services.AddSingleton<AttendanceService>();
+                        services.AddSingleton<MemberService>();
+
+                        services.AddControllers();
+                        services.AddScoped<ITokenService, TokenService>();
 
                         services.AddCors(options =>
                         {
                             options.AddPolicy("AllowAll", builder =>
                             {
-                                builder.AllowAnyOrigin()    
-                                       .AllowAnyMethod()    
-                                       .AllowAnyHeader();   
+                                builder.AllowAnyOrigin()
+                                       .AllowAnyMethod()
+                                       .AllowAnyHeader();
                             });
                         });
 
@@ -42,26 +49,26 @@ namespace BackEnd
                                     ValidateAudience = true,
                                     ValidateLifetime = true,
                                     ValidateIssuerSigningKey = true,
-                                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key")),  
-                                    ValidIssuer = "your_issuer",  
-                                    ValidAudience = "your_audience" 
+                                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key")),
+                                    ValidIssuer = "your_issuer",
+                                    ValidAudience = "your_audience"
                                 };
                             });
                     })
-                    .Configure((context, app) =>  
+                    .Configure((context, app) =>
                     {
-                        var env = context.HostingEnvironment;  
+                        var env = context.HostingEnvironment;
 
-                        if (env.IsDevelopment())  
+                        if (env.IsDevelopment())
                         {
-                            app.UseDeveloperExceptionPage();  
+                            app.UseDeveloperExceptionPage();
                         }
 
-                        app.UseCors("AllowAll");  
-                        app.UseAuthentication();  
-                        app.UseAuthorization();   
+                        app.UseCors("AllowAll");
+                        app.UseAuthentication();
+                        app.UseAuthorization();
 
-                        app.UseRouting();  
+                        app.UseRouting();
 
                         app.UseEndpoints(endpoints =>
                         {

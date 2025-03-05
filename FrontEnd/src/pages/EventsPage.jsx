@@ -48,34 +48,46 @@ function EventsPage() {
   };
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onMouseDown={() => setIsMouseDown(true)}
-      onMouseUp={() => setIsMouseDown(false)}
-    >
-      <div className="flex justify-between items-center px-6 mb-6">
-        <h2 className="text-3xl font-bold text-[rgb(69,75,27)]">Events</h2>
-        <AddCircleIcon
+    <div className="min-h-screen flex flex-col bg-[rgb(245,245,240)]">
+      {/* Header Section */}
+      <header className="bg-[rgb(69,75,27)] text-white py-4 px-6 flex justify-between items-center shadow-md">
+        <h1 className="text-2xl font-bold">Events</h1>
+        <button
           onClick={() => setAddEventModalOpen(true)}
-          className="text-[rgb(69,75,27)] cursor-pointer"
-          style={{ fontSize: 40 }}
-        />
-      </div>
-      <EventAttendanceGraph />
-      <EventList
-        events={events}
-        currentIndex={currentIndex}
-        onNavigate={handleManualNavigation}
-      />
-   
-
-      {isAddEventModalOpen && (
-        <div
-          className="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50"
+          className="flex items-center space-x-2 bg-white text-[rgb(69,75,27)] px-4 py-2 rounded-md shadow-md hover:bg-gray-100 transition"
         >
-          <div className="rounded-lg shadow-lg p-6 w-11/12 md:w-1/2 lg:w-1/3 transition-transform transform scale-95 animate-fade-in relative">
+          <AddCircleIcon className="text-[rgb(69,75,27)]" />
+          <span>Add Event</span>
+        </button>
+      </header>
+
+      {/* Main Content Section */}
+      <main className="flex flex-col lg:flex-row p-6 space-y-6 lg:space-y-0 lg:space-x-6">
+        {/* Left Panel - Event Graph */}
+        <section className="lg:w-2/3 ">
+          <h2 className="text-xl font-semibold text-[rgb(69,75,27)] ">
+            Attendance Overview
+          </h2>
+          <EventAttendanceGraph />
+        </section>
+
+        {/* Right Panel - Event List */}
+        <section className="lg:w-1/3">
+          <h2 className="text-xl font-semibold text-[rgb(69,75,27)] mb-4">
+            Upcoming Events
+          </h2>
+          <EventList
+            events={events}
+            currentIndex={currentIndex}
+            onNavigate={handleManualNavigation}
+          />
+        </section>
+      </main>
+
+      {/* Add Event Modal */}
+      {isAddEventModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
             <button
               onClick={() => setAddEventModalOpen(false)}
               className="absolute top-4 right-4 text-gray-700 hover:text-gray-900"

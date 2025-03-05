@@ -5,10 +5,12 @@ import EventIcon from "@mui/icons-material/Event";
 import DataUsageIcon from "@mui/icons-material/DataUsage";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HomeIcon from "@mui/icons-material/Home";
+import { useFetchTrigger } from "./FetchContext"; // Import the context
 
 const Sidebar = ({ onLogout, setSidebarWidth }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const location = useLocation();  // Hook to get the current route path
+  const location = useLocation();
+  const { setFetchTrigger } = useFetchTrigger(); // Get trigger function from context
 
   const updateSidebarWidth = useCallback(() => {
     setSidebarWidth(isHovered ? 200 : 60);
@@ -17,9 +19,6 @@ const Sidebar = ({ onLogout, setSidebarWidth }) => {
   useEffect(() => {
     updateSidebarWidth();
   }, [updateSidebarWidth]);
-
-  // Function to check if the link is the current active path
-  const isActive = (path) => location.pathname === path;
 
   return (
     <div
@@ -35,28 +34,31 @@ const Sidebar = ({ onLogout, setSidebarWidth }) => {
           icon={<HomeIcon />}
           text="Home"
           isHovered={isHovered}
-          isActive={isActive("/")}
+          isActive={location.pathname === "/"}
         />
         <NavItem
           to="/attendance"
           icon={<DataUsageIcon />}
           text="Attendance"
           isHovered={isHovered}
-          isActive={isActive("/attendance")}
+          isActive={location.pathname === "/attendance"}
+          onHover={() => setFetchTrigger("attendance")} // Trigger fetch
         />
         <NavItem
           to="/events"
           icon={<EventIcon />}
           text="Events"
           isHovered={isHovered}
-          isActive={isActive("/events")}
+          isActive={location.pathname === "/events"}
+          onHover={() => setFetchTrigger("events")} // Trigger fetch
         />
         <NavItem
           to="/members"
           icon={<GroupsIcon />}
           text="Members"
           isHovered={isHovered}
-          isActive={isActive("/members")}
+          isActive={location.pathname === "/members"}
+          onHover={() => setFetchTrigger("members")} // Trigger fetch
         />
         <NavItemLogout onLogout={onLogout} isHovered={isHovered} />
       </nav>
@@ -64,14 +66,15 @@ const Sidebar = ({ onLogout, setSidebarWidth }) => {
   );
 };
 
-const NavItem = ({ to, icon, text, isHovered, isActive }) => (
+const NavItem = ({ to, icon, text, isHovered, isActive, onHover }) => (
   <Link
     to={to}
     className={`flex items-center p-2 rounded-md transition-all ${
       isActive
-        ? "text-green-700" // Active state color (same as hover)
+        ? "text-green-700"
         : "text-[rgb(69,75,27)] hover:text-green-700"
     }`}
+    onMouseEnter={onHover} // Fetch on hover
   >
     <span className="w-6 h-6 flex-shrink-0">{icon}</span>
     <span className={`ml-3 transition-opacity ${isHovered ? "opacity-100" : "hidden"}`}>
