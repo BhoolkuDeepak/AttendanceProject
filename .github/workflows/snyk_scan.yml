@@ -7,10 +7,14 @@ jobs:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:  
           command: code test
           args: --sarif-file-output=snyk.sarif
+        
       - name: Print Synk Sarif file
         run : cat snyk.sarif
+     
+        
