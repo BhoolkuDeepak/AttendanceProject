@@ -42,7 +42,7 @@ namespace BackEnd
                                     ValidateAudience = true,
                                     ValidateLifetime = true,
                                     ValidateIssuerSigningKey = true,
-                                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key")),  
+                                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(${{secrets.ISSUER_SIGNING_KEY}})),  
                                     ValidIssuer = "your_issuer",  
                                     ValidAudience = "your_audience" 
                                 };
